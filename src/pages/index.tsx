@@ -10,11 +10,15 @@ import styles from "../styles/pages/Home.module.css"
 import { CountdownProvider } from "../contexts/CountdownContext"
 import { ChallengesProvider } from "../contexts/ChallengesContext"
 import { GetServerSideProps } from "next"
+import { SignupProvider } from "../contexts/SignupContext"
 
 interface HomeProps {
   level: number
   currentExperience: number
   challengesCompleted: number
+  name: string
+  nickname: string
+  urlAvatar: string
 }
 
 export default function Home(props: HomeProps) {
@@ -34,7 +38,13 @@ export default function Home(props: HomeProps) {
         <CountdownProvider>
           <section>
             <div>
-              <Profile />
+              <SignupProvider
+                name={props.name}
+                nickname={props.nickname}
+                urlAvatar={props.urlAvatar}
+              >
+                <Profile />
+              </SignupProvider>
               <CompletedChallenges />
               <Countdown />
             </div>
@@ -49,13 +59,29 @@ export default function Home(props: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies
+  const {
+    level,
+    currentExperience,
+    challengesCompleted,
+    name,
+    nickname,
+    urlAvatar,
+  } = ctx.req.cookies
+
+  if (!nickname) {
+    ctx.res.setHeader("location", `/signup`)
+    ctx.res.statusCode = 302
+    ctx.res.end()
+  }
 
   return {
     props: {
       level: Number(level),
       currentExperience: Number(currentExperience),
       challengesCompleted: Number(challengesCompleted),
+      name: name,
+      nickname: nickname,
+      urlAvatar: urlAvatar,
     },
   }
 }
