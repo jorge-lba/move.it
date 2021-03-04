@@ -21,7 +21,7 @@ export function SignupProvider({ children, ...rest }) {
     Cookies.set("name", String(name))
     Cookies.set("nickname", String(nickname))
     Cookies.set("urlAvatar", String(urlAvatar))
-  }, [name, nickname, urlAvatar])
+  }, [name, urlAvatar])
 
   function handleNickname(nickname: string) {
     setNickname(nickname)

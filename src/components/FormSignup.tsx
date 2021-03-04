@@ -1,5 +1,7 @@
 import { useContext } from "react"
 import { useRouter } from "next/router"
+import Cookies from "js-cookie"
+
 import axios from "axios"
 
 import { SignupContext } from "../contexts/SignupContext"
@@ -19,6 +21,8 @@ export function FormSignup() {
 
     handleName(user.data.name)
     handleUrlAvatar(String(user.data.avatar_url))
+
+    Cookies.set("urlAvatar", String(user.data.avatar_url))
 
     router.push("/")
   }

@@ -1,0 +1,68 @@
+.menuLeftContainer {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  height: 100vh;
+  width: 6rem;
+
+  padding: 2rem 0;
+
+  background: var(--white);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 3rem;
+}
+
+.menuOptions {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuOption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 3.2rem;
+
+  margin-bottom: 1rem;
+}
+
+.menuOption img {
+  width: 2.2rem;
+}
+
+.menuOptionActive {
+}
+
+.menuOptionActive::before {
+  content: "";
+  position: absolute;
+  left: 0;
+
+  height: 3.2rem;
+  width: 0.25rem;
+
+  border-radius: 0 5px 5px 0;
+  background: var(--blue);
+}
+
+.logout {
+  width: 2.2rem;
+  opacity: 0.5;
+
+  transition: 0.2s;
+
+  cursor: pointer;
+}
+
+.logout:hover {
+  opacity: 1;
+}

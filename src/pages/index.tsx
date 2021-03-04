@@ -11,6 +11,8 @@ import { CountdownProvider } from "../contexts/CountdownContext"
 import { ChallengesProvider } from "../contexts/ChallengesContext"
 import { GetServerSideProps } from "next"
 import { SignupProvider } from "../contexts/SignupContext"
+import { MenuLeft } from "../components/MenuLeft"
+import { useEffect } from "react"
 
 interface HomeProps {
   level: number
@@ -22,6 +24,8 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
+  useEffect(() => console.log("home ------ ", props.urlAvatar), [])
+
   return (
     <ChallengesProvider
       level={props.level}
@@ -32,6 +36,9 @@ export default function Home(props: HomeProps) {
         <Head>
           <title>Inicio | move.it</title>
         </Head>
+        <SignupProvider>
+          <MenuLeft />
+        </SignupProvider>
 
         <ExperienceBar />
 
@@ -73,6 +80,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     ctx.res.statusCode = 302
     ctx.res.end()
   }
+
+  console.log("props ----- ", urlAvatar)
 
   return {
     props: {
