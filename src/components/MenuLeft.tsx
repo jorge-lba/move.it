@@ -1,14 +1,9 @@
 import { useRouter } from "next/router"
-import { useContext } from "react"
-
-import { SignupContext } from "../contexts/SignupContext"
 
 import styles from "../styles/components/MenuLeft.module.css"
 
 export function MenuLeft() {
   const router = useRouter()
-
-  const { clearCookies } = useContext(SignupContext)
 
   function logout() {
     router.replace("/signup")
